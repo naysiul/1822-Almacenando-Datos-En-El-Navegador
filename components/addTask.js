@@ -8,32 +8,32 @@ export const addTask = (evento) => {
     const input = document.querySelector('[data-form-input]');
     const calendar = document.querySelector("[data-form-date]");
     const value = input.value;
-    const date = calendar.value;  
-    const dateFormat = moment(date).format('DD/MM/YYYY');    
-    
+    const date = calendar.value;
+    const dateFormat = moment(date).format('DD/MM/YYYY');
+
     input.value = '';
     calendar.value = '';
 
     const taskObj = {
         value,
         dateFormat
-        };
+    };
 
     // **** || []   le dice que si lo primero es null, entonces lo que hara es poner todo en vacio
     // agregamos JSON.parsepara pasar de string a ojbeto  
     const taskList = JSON.parse(localStorage.getItem("tasks")) || [];
-    taskList.push({value, dateFormat});
+    taskList.push({ value, dateFormat });
     localStorage.setItem("tasks", JSON.stringify(taskList))  // (llave, valor)
 
-    const task =  createTask(taskObj);
+    const task = createTask(taskObj);
     list.appendChild(task);
 };
 // lo de abajo de comento pues esa linea se movio a otro lado y se modifico a la vez
 //const taskList = [];  // el const no quiere decir que no podamos cambiar el conteniedo de la lista
-const createTask = ({value, dateFormat}) => {      //entre las llaves hacemos la destructuracion del objeto -- decir los valores que deseamos sacar o obtener
+export const createTask = ({ value, dateFormat }) => {      //entre las llaves hacemos la destructuracion del objeto -- decir los valores que deseamos sacar o obtener
     const task = document.createElement('li');
     task.classList.add('card');
-    
+
     //backticks
     const taskContent = document.createElement('div');
 
